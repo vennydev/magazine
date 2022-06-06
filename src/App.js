@@ -22,6 +22,8 @@ function App() {
 const AppStyle = styled.div`
   max-width: 350px;
   margin: 0 auto;
+  padding: 40px 20px;
+  background-color: white;
 `;
 
 export default App;

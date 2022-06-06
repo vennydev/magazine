@@ -75,7 +75,7 @@ const Signup = () => {
       </div>
       <div className="field">
         <label className="label">Name</label>
-        <div className="control has-icons-left has-icons-right">
+        <div className="control">
           <input
             className="input"
             type="text"
@@ -85,18 +85,12 @@ const Signup = () => {
             onChange={onChange}
             ref={nameRef}
           />
-          <span className="icon is-small is-left">
-            <i className="fas fa-user"></i>
-          </span>
-          <span className="icon is-small is-right">
-            <i className="fas fa-check"></i>
-          </span>
         </div>
         {/* <p className="help is-success">This username is available</p> */}
       </div>
       <div className="field">
         <label className="label">Password</label>
-        <div className="control has-icons-left has-icons-right">
+        <div className="control">
           <input
             className="input"
             type="password"
@@ -106,12 +100,6 @@ const Signup = () => {
             onChange={onChange}
             ref={pwRef}
           />
-          <span className="icon is-small is-left">
-            <i className="fas fa-envelope"></i>
-          </span>
-          <span className="icon is-small is-right">
-            <i className="fas fa-exclamation-triangle"></i>
-          </span>
         </div>
         {/* <p className="help is-danger">This email is invalid</p> */}
       </div>
