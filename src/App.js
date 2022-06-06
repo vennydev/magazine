@@ -1,7 +1,12 @@
+import { Route, Routes } from "react-router-dom";
+import Signup from "./Components/Signup";
+
 function App() {
   return (
     <div className="App">
-      <h1>프로젝트 시작</h1>
+      <Routes>
+        <Route path="/" element={<Signup />}></Route>
+      </Routes>
     </div>
   );
 }
