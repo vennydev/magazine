@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { db, auth } from "../shared/firebase";
-// import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { addDoc, collection } from "firebase/firestore";
 
 const Signup = () => {
   const [inputValue, setInputValue] = useState({
@@ -23,20 +24,26 @@ const Signup = () => {
     setInputValue({ ...inputValue, [name]: value });
   };
 
-  const signup = () => {
+  //
+  const signup = async () => {
     if (emailRegExp.test(user_id)) {
       if (pwRegExp.test(user_pw)) {
-        alert("환영합니다 :)");
+        const user = await createUserWithEmailAndPassword(
+          auth,
+          user_id,
+          user_pw
+        );
+        const user_data = await addDoc(collection(db, "user-info"), {
+          user_id: user_id,
+          user_pw: user_pw,
+          user_name: user_name,
+        });
       } else {
-        alert("비밀번호는 8~15자 영문, 숫자 조합이어야 합니다 :(");
+        alert("8~15자 영문, 숫자를 조합해주세요 :(");
       }
     } else {
       alert("유효한 이메일 형식이 아닙니다 :(");
     }
-    // if (emailRegExp.test(user_id) && pwRegExp.test(user_pw)) {
-    // } else {
-    //   alert("다시 시도해주세요 :)");
-    // }
   };
 
   return (
