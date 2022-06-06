@@ -8,10 +8,13 @@
     "@testing-library/user-event": "^13.2.1",
     "bulma": "^0.9.4",
     "firebase": "^9.8.2",
+    "history": "5",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-router-dom": "^6.3.0",
+    "react-responsive": "^9.0.0-beta.10",
+    "react-router-dom": "6",
     "react-scripts": "5.0.1",
+    "styled-components": "^5.3.5",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
