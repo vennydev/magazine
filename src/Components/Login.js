@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { auth } from "../shared/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [inputstate, setInputstate] = useState({ user_id: "", user_name: "" });
   const { user_id, user_pw } = inputstate;
+  let navigation = useNavigate();
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -14,6 +16,7 @@ const Login = () => {
   const login = async () => {
     const user = await signInWithEmailAndPassword(auth, user_id, user_pw);
     console.log(user);
+    navigation("/");
   };
 
   return (

@@ -3,6 +3,7 @@ import { db, auth } from "../shared/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
 
 const Signup = () => {
   const [inputValue, setInputValue] = useState({
@@ -10,7 +11,7 @@ const Signup = () => {
     user_name: "",
     user_pw: "",
   });
-  let navigate = useNavigate();
+  let navigation = useNavigate();
   const emailRef = useRef(null);
   const nameRef = useRef(null);
   const pwRef = useRef(null);
@@ -33,8 +34,7 @@ const Signup = () => {
   const signup = async () => {
     if (emailRegExp.test(user_id)) {
       if (pwRegExp.test(user_pw)) {
-        // auth에 user 등록\
-        alert("회원가입을 축하드립니다 :)");
+        // auth에 user 등록
         const user = await createUserWithEmailAndPassword(
           auth,
           user_id,
@@ -46,7 +46,11 @@ const Signup = () => {
           user_pw: user_pw,
           user_name: user_name,
         });
-        navigate("/login");
+        if (auth) {
+          signOut(auth);
+          alert("회원가입을 축하드립니다 :)");
+          navigation("/login");
+        }
       } else {
         alert("8~15자 영문, 숫자를 조합해주세요 :(");
         pwRef.current.focus();
