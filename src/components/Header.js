@@ -2,13 +2,13 @@ import styled from "styled-components";
 import { AiOutlineAliwangwang } from "react-icons/ai";
 import Button from "./Button";
 
-const Header = () => {
+const Header = ({ setIsLogin, is_login }) => {
   return (
     <HeaderStyle>
       <Logo className="logo">
         <AiOutlineAliwangwang />
       </Logo>
-      <Button></Button>
+      <Button setIsLogin={setIsLogin} is_login={is_login} />
     </HeaderStyle>
   );
 };
