@@ -3,7 +3,6 @@ import styled from "styled-components";
 const Layout = (props) => {
   const { children, is_flex } = props;
   const styles = { is_flex };
-  console.log(styles);
   return <LayoutStyle {...styles}>{children}</LayoutStyle>;
 };
 

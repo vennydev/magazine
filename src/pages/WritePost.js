@@ -1,5 +1,6 @@
 // module
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
 import CreateButton from "@mui/material/Button";
 import { auth, db, storage } from "../shared/firebase";
@@ -19,6 +20,7 @@ import Layout from "../elements/Layout";
 // import Moment from "react-moment";
 
 const WritePost = () => {
+  let navigation = useNavigate();
   const text_ref = useRef(null);
   const uploadFileInput_ref = useRef(null);
   const layoutValue_ref = useRef(null);
@@ -28,10 +30,10 @@ const WritePost = () => {
     post_imageURL: "",
     post_time: "",
     post_text: "",
-    post_layoutValue: "",
+    post_layoutValue: "textLeft",
   });
 
-  const { post_author, post_image, post_time, post_text, post_layoutValue } =
+  const { post_author, post_imageURL, post_time, post_text, post_layoutValue } =
     post;
 
   // 1. post_image 업데이트
@@ -58,12 +60,25 @@ const WritePost = () => {
     });
   };
 
-  // 3. post_time, post_text 업데이트
-  // 게시물 등록 버튼을 누르면 게시물 등록한 시간을 ms로 구해 업데이트한다.
+  // 3. post_time 업데이트 + 기입하지 않은 input 체크 + 체크 후 메인 페이지로 이동
   const onClick = (e) => {
     const postTimestamp = +new Date();
-    const textValue = text_ref.current.value;
-    setPost({ ...post, post_time: postTimestamp, post_text: textValue });
+    setPost({ ...post, post_time: postTimestamp });
+    console.log(post_layoutValue);
+    if (post_imageURL === "") {
+      alert("사진을 올릴 수 있습니다");
+      return uploadFileInput_ref.current.focus();
+    } else if (post_text === "") {
+      alert("글 안써요?");
+      return text_ref.current.focus();
+    }
+    alert("게시글이 등록되었습니다");
+    navigation("/");
+  };
+  // 4. post_text 업데이트
+  const handleText = (e) => {
+    const text = e.target.value;
+    setPost({ ...post, post_text: text });
   };
 
   // 4. post_layoutValue 업데이트
@@ -72,13 +87,10 @@ const WritePost = () => {
     setPost({ ...post, post_layoutValue: layoutValue });
   };
 
-  console.log(post);
-
   useEffect(() => {
-    console.log("유저 네임 업데이트!");
     updateUserName();
   }, []);
-
+  console.log(post);
   return (
     <WritePostStyle>
       <div>
@@ -98,32 +110,6 @@ const WritePost = () => {
         onChange={uploadFB}
       />
 
-      {/* <Layout is_flex>
-        <LayoutColumn image>
-          <strong>Image</strong>
-        </LayoutColumn>
-        <LayoutColumn text>
-          <div>Text</div>
-        </LayoutColumn>
-      </Layout>
-
-      <Layout is_flex>
-        <LayoutColumn text>
-          <div>Text</div>
-        </LayoutColumn>
-        <LayoutColumn image>
-          <strong>Image</strong>
-        </LayoutColumn>
-      </Layout>
-      <Layout>
-      <LayoutColumn image>
-          <strong>Image</strong>
-        </LayoutColumn>
-        <LayoutColumn text>
-          <div>Text</div>
-        </LayoutColumn>
-      </Layout> */}
-
       <Column>
         <div>
           <input
@@ -131,7 +117,9 @@ const WritePost = () => {
             name="layout"
             id="left"
             value="textLeft"
+            ref={layoutValue_ref}
             onChange={handleLayoutValue}
+            checked
           />
           <label htmlFor="left">
             <strong>왼쪽에 이미지 오른쪽에 텍스트</strong>
@@ -146,6 +134,7 @@ const WritePost = () => {
           </LayoutColumn>
         </Layout>
       </Column>
+
       <Column>
         <div>
           <input
@@ -169,6 +158,7 @@ const WritePost = () => {
         </Layout>
         <Layout></Layout>
       </Column>
+
       <Column>
         <div>
           <input
@@ -203,6 +193,7 @@ const WritePost = () => {
           resize: "none",
           padding: "10px 20px",
         }}
+        onChange={handleText}
         ref={text_ref}
       />
       <CreateButton
@@ -263,7 +254,6 @@ const UploadFileBtn = styled.input`
 `;
 
 const Column = styled.div`
-  margin: 0 auto;
   width: 80%;
 `;
 
