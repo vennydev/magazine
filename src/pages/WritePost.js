@@ -15,6 +15,7 @@ import {
 } from "firebase/firestore";
 import { useState } from "react";
 import { useEffect } from "react";
+import Layout from "../elements/Layout";
 // import Moment from "react-moment";
 
 const WritePost = () => {
@@ -97,6 +98,32 @@ const WritePost = () => {
         onChange={uploadFB}
       />
 
+      {/* <Layout is_flex>
+        <LayoutColumn image>
+          <strong>Image</strong>
+        </LayoutColumn>
+        <LayoutColumn text>
+          <div>Text</div>
+        </LayoutColumn>
+      </Layout>
+
+      <Layout is_flex>
+        <LayoutColumn text>
+          <div>Text</div>
+        </LayoutColumn>
+        <LayoutColumn image>
+          <strong>Image</strong>
+        </LayoutColumn>
+      </Layout>
+      <Layout>
+      <LayoutColumn image>
+          <strong>Image</strong>
+        </LayoutColumn>
+        <LayoutColumn text>
+          <div>Text</div>
+        </LayoutColumn>
+      </Layout> */}
+
       <Column>
         <div>
           <input
@@ -110,14 +137,14 @@ const WritePost = () => {
             <strong>왼쪽에 이미지 오른쪽에 텍스트</strong>
           </label>
         </div>
-        <LayoutWrapper className="layout first-layout">
+        <Layout is_flex>
           <LayoutColumn image>
             <strong>Image</strong>
           </LayoutColumn>
           <LayoutColumn text>
             <div>Text</div>
           </LayoutColumn>
-        </LayoutWrapper>
+        </Layout>
       </Column>
       <Column>
         <div>
@@ -132,14 +159,15 @@ const WritePost = () => {
             <strong>왼쪽에 텍스트 오른쪽에 이미지</strong>
           </label>
         </div>
-        <LayoutWrapper className="layout second-layout">
+        <Layout is_flex>
           <LayoutColumn text>
             <div>Text</div>
           </LayoutColumn>
           <LayoutColumn image>
             <strong>Image</strong>
           </LayoutColumn>
-        </LayoutWrapper>
+        </Layout>
+        <Layout></Layout>
       </Column>
       <Column>
         <div>
@@ -154,14 +182,14 @@ const WritePost = () => {
             <strong>아래에 텍스트 위에 이미지</strong>
           </label>
         </div>
-        <LayoutWrapper className="layout third-layout">
+        <Layout>
           <LayoutColumn image>
             <strong>Image</strong>
           </LayoutColumn>
           <LayoutColumn text>
             <div>Text</div>
           </LayoutColumn>
-        </LayoutWrapper>
+        </Layout>
       </Column>
 
       <TextareaAutosize
@@ -235,14 +263,8 @@ const UploadFileBtn = styled.input`
 `;
 
 const Column = styled.div`
-  width: 70%;
-  text-align: center;
-`;
-
-const LayoutWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  margin-top: 15px;
+  margin: 0 auto;
+  width: 80%;
 `;
 
 const LayoutColumn = styled.div`
