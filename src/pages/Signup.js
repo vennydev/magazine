@@ -15,10 +15,9 @@ const Signup = () => {
   const emailRef = useRef(null);
   const nameRef = useRef(null);
   const pwRef = useRef(null);
-  //   const nameRefCur = nameRef.current.className;
-  //   const pwRefCur = pwRef.current.className;
 
   const { user_id, user_name, user_pw } = inputValue;
+
   // 이메일 유효성 검사
   const emailRegExp =
     /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
@@ -26,11 +25,13 @@ const Signup = () => {
   // 비밀번호 유효성 검사
   const pwRegExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,15}$/;
 
+  // 이메일, 비밀번호 상태 업데이트
   const onChange = (e) => {
     const { value, name } = e.target;
     setInputValue({ ...inputValue, [name]: value });
   };
 
+  // 아이디, 비밀번호 유효성 검사
   const signup = async () => {
     if (emailRegExp.test(user_id)) {
       if (pwRegExp.test(user_pw)) {

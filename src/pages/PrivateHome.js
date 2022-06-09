@@ -5,7 +5,7 @@ import { loadPostsFB } from "../redux/modules/posts";
 import styled from "styled-components";
 import { AiFillMeh } from "react-icons/ai";
 
-// module
+// components
 import WritePost from "./WritePost";
 
 const PrivateHome = () => {
